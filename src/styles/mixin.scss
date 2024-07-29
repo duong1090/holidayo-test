@@ -1,0 +1,53 @@
+@import './variables.module.scss';
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+@mixin center-alignment {
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin main-container {
+  max-width: 1140px;
+  padding: 15px;
+  margin: auto;
+}
+
+@mixin media-between-sizes($lower, $upper) {
+  @if map-has-key($breakpoints, $lower) and map-has-key($breakpoints, $upper) {
+    $lower-breakpoint: map-get($breakpoints, $lower);
+    $upper-breakpoint: map-get($breakpoints, $upper);
+
+    @media (min-width: $lower-breakpoint) and (max-width: $upper-breakpoint) {
+      @content;
+    }
+  }
+}
+
+@mixin media-min-size($size) {
+  @if map-has-key($breakpoints, $size) {
+    $lowest-breakpoint: map-get($breakpoints, $size);
+
+    @media (min-width: $lowest-breakpoint) {
+      @content;
+    }
+  }
+}
+
+@mixin media-max-size($size) {
+  @if map-has-key($breakpoints, $size) {
+    $highest-breakpoint: map-get($breakpoints, $size);
+
+    @media (max-width: $highest-breakpoint) {
+      @content;
+    }
+  }
+}
